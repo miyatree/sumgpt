@@ -25,7 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         throw error;
       }
 
-      const publicUrl = `/api/serve-file?file=${encodeURIComponent(fileName)}`;
+      const publicUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/serve-file?file=${encodeURIComponent(fileName)}`;
       res.status(200).json({ url: publicUrl });
     } catch (error) {
       console.error('Error:', error);
