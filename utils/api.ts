@@ -1,3 +1,4 @@
+// utils/api.ts
 import axios from 'axios';
 import { Configuration, OpenAIApi } from 'openai';
 
@@ -19,7 +20,7 @@ const saveTextToHTML = async (text: string): Promise<string> => {
 export const createSummary = async (text: string): Promise<string> => {
   const url = await saveTextToHTML(text);
 
-  const prompt = `Please summarize the ${url}, more than 400 words.`;
+  const prompt = `Please summarize the content at the following URL: ${url}. The summary should be more than 400 words.`;
 
   try {
     const response = await openai.createChatCompletion({

@@ -1,3 +1,4 @@
+// components/Article.tsx
 import React from 'react';
 
 interface ArticleProps {
