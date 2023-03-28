@@ -22,7 +22,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         throw error;
       }
 
-      res.status(200).json({ url: `/api/get-html?file=${encodeURIComponent(fileName)}` });
+      const publicUrl = `https://${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${process.env.SUPABASE_STORAGE_BUCKET}/${fileName}`;
+      res.status(200).json({ url: publicUrl });
     } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ message: 'Failed to save the file' });
@@ -31,6 +32,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(405).json({ message: 'Method not allowed' });
   }
 };
+
 
 const generateRandomFileName = (): string => {
   const randomString = Math.random().toString(36).substr(2, 9);
