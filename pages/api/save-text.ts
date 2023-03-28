@@ -16,7 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const { error } = await supabase.storage
         .from(process.env.SUPABASE_STORAGE_BUCKET)
-        .upload(fileName, new Blob([fileContent], { type: 'text/html' }));
+        .upload(fileName, new Blob([fileContent], { type: 'text/html;charset=utf-8' })); // Update the type here
 
       if (error) {
         throw error;
