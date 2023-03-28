@@ -7,17 +7,20 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "autoprefixer": "^10.4.14",
     "next": "latest",
-    "postcss": "^8.4.21",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^3.2.7"
+    "react": "latest",
+    "react-dom": "latest",
+    "axios": "latest",
+    "openai": "latest",
+    "tailwindcss": "latest",
+    "autoprefixer": "latest",
+    "postcss": "latest"
   },
   "devDependencies": {
-    "@types/node": "^12.12.21",
-    "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.1",
-    "typescript": "^4.8.3"
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "typescript": "latest",
+    "@next/eslint-plugin-next": "latest",
+    "@types/react-dom": "latest"
   }
 }
