@@ -7,20 +7,21 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.12.1",
+    "autoprefixer": "latest",
+    "axios": "latest",
     "next": "latest",
+    "openai": "latest",
+    "postcss": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "axios": "latest",
-    "openai": "latest",
-    "tailwindcss": "latest",
-    "autoprefixer": "latest",
-    "postcss": "latest"
+    "tailwindcss": "latest"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
-    "typescript": "latest",
-    "@next/eslint-plugin-next": "latest",
-    "@types/react-dom": "latest"
+    "@types/react-dom": "latest",
+    "typescript": "latest"
   }
 }

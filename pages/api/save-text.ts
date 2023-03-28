@@ -1,20 +1,30 @@
 // pages/api/save-text.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import { promises as fs } from 'fs';
-import path from 'path';
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_KEY
+);
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const { text } = req.body;
     const fileName = generateRandomFileName();
-    const filePath = path.join(process.cwd(), 'public', fileName);
-    console.log('Saving file:', filePath); // Add this line
+    const fileContent = wrapInArticleTemplate(text);
 
     try {
-      await fs.writeFile(filePath, wrapInArticleTemplate(text));
-      res.status(200).json({ url: `/${fileName}` });
+      const { error } = await supabase.storage
+        .from(process.env.SUPABASE_STORAGE_BUCKET)
+        .upload(fileName, new Blob([fileContent], { type: 'text/html' }));
+
+      if (error) {
+        throw error;
+      }
+
+      res.status(200).json({ url: `/api/get-html?file=${encodeURIComponent(fileName)}` });
     } catch (error) {
-      console.error('Error:', error); // Add this line
+      console.error('Error:', error);
       res.status(500).json({ message: 'Failed to save the file' });
     }
   } else {
