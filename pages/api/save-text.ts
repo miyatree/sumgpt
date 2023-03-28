@@ -22,7 +22,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         throw error;
       }
 
-      const publicUrl = `https://${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${process.env.SUPABASE_STORAGE_BUCKET}/${fileName}`;
+      const publicUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${process.env.SUPABASE_STORAGE_BUCKET}/${fileName}`;
       res.status(200).json({ url: publicUrl });
     } catch (error) {
       console.error('Error:', error);
