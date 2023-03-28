@@ -7,10 +7,16 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
+// Create a custom axios instance
+const customAxios = axios.create();
+
+// Remove the 'User-Agent' header from the request
+customAxios.defaults.headers.common['User-Agent'] = undefined;
+
 const saveTextToHTML = async (text: string): Promise<string> => {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const response = await axios.post(`${baseUrl}/api/save-text`, { text });
+    const response = await customAxios.post(`${baseUrl}/api/save-text`, { text });
     return response.data.url;
   } catch (error) {
     console.error('Failed to save text to HTML', error);
