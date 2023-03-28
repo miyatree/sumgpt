@@ -13,10 +13,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const fileName = generateRandomFileName();
     const fileContent = wrapInArticleTemplate(text);
 
+    const encoder = new TextEncoder();
+    const encodedFileContent = encoder.encode(fileContent); // Encode the file content
+
     try {
       const { error } = await supabase.storage
         .from(process.env.SUPABASE_STORAGE_BUCKET)
-        .upload(fileName, new Blob([fileContent], { type: 'text/html;charset=utf-8' })); // Update the type here
+        .upload(fileName, encodedFileContent, { contentType: 'text/html;charset=utf-8' }); // Update the upload method
 
       if (error) {
         throw error;
@@ -32,6 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(405).json({ message: 'Method not allowed' });
   }
 };
+
 
 
 const generateRandomFileName = (): string => {
