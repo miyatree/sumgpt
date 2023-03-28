@@ -8,11 +8,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { text } = req.body;
     const fileName = generateRandomFileName();
     const filePath = path.join(process.cwd(), 'public', fileName);
+    console.log('Saving file:', filePath); // Add this line
 
     try {
       await fs.writeFile(filePath, wrapInArticleTemplate(text));
       res.status(200).json({ url: `/${fileName}` });
     } catch (error) {
+      console.error('Error:', error); // Add this line
       res.status(500).json({ message: 'Failed to save the file' });
     }
   } else {
