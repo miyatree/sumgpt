@@ -1,4 +1,3 @@
-import openai from 'openai';
 import axios from 'axios';
 
 import { Configuration, OpenAIApi } from 'openai';
