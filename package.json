@@ -1,5 +1,5 @@
 {
-  "name": "nextjs",
+  "name": "sumgpt",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "eslint": "8.35.0",
-    "eslint-config-next": "13.2.4",
-    "next": "13.2.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "next": "lastest",
+    "react": "lastest",
+    "react-dom": "lastest",
+    "axios": "lastest",
+    "openai": "lastest",
+    "tailwindcss": "lastest",
+    "autoprefixer": "lastest",
+    "postcss": "lastest"
+  },
+  "devDependencies": {
+    "@types/node": "lastest",
+    "@types/react": "lastest",
+    "typescript": "lastest",
+    "@next/eslint-plugin-next": "lastest",
+    "@types/react-dom": "lastest"
   }
 }
