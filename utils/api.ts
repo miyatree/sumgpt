@@ -9,19 +9,13 @@ const openai = new OpenAIApi(configuration);
 
 
 export const createSummary = async (text: string): Promise<string> => {
-  const url = await saveTextToHTML(text);
-
-  const prompt = `Please summarize the ${url}, more than 400 words.`;
-
-  const response = await openai.createChatCompletion({
-    model: 'gpt-3.5-turbo',
-    messages: [
-      { role: 'system', content: 'You are a helpful assistant.' },
-      { role: 'user', content: prompt },
-    ],
-  });
-
-  return response.data.choices[0].message.content;
+  try {
+    const response = await axios.post('/api/summarize-text', { text });
+    return response.data.summary;
+  } catch (error) {
+    console.error('Failed to create summary', error);
+    return '';
+  }
 };
 
 
