@@ -27,7 +27,7 @@ const saveTextToHTML = async (text: string): Promise<string> => {
 export const createSummary = async (text: string): Promise<string> => {
   const url = await saveTextToHTML(text);
 
-  const prompt = `Please summarize the content at the page( ${url} ). The summary should be more than 400 words.`;
+  const prompt = `根据这个网页的内容（ ${url} )，用中文生成不少于400字的内容摘要。`;
 
   try {
     const response = await openai.createChatCompletion({
