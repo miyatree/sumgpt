@@ -9,7 +9,8 @@ const openai = new OpenAIApi(configuration);
 
 const saveTextToHTML = async (text: string): Promise<string> => {
   try {
-    const response = await axios.post('/api/save-text', { text });
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const response = await axios.post(`${baseUrl}/api/save-text`, { text });
     return response.data.url;
   } catch (error) {
     console.error('Failed to save text to HTML', error);
