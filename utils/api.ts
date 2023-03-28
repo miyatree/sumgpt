@@ -1,14 +1,20 @@
 import openai from 'openai';
 import axios from 'axios';
 
-openai.apiKey = process.env.OPENAI_API_KEY;
+import { Configuration, OpenAIApi } from 'openai';
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
+
 
 export const createSummary = async (text: string): Promise<string> => {
   const url = await saveTextToHTML(text);
 
   const prompt = `Please summarize the ${url}, more than 400 words.`;
 
-  const response = await openai.ChatCompletion.create({
+  const response = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
     messages: [
       { role: 'system', content: 'You are a helpful assistant.' },
@@ -16,8 +22,9 @@ export const createSummary = async (text: string): Promise<string> => {
     ],
   });
 
-  return response.choices[0].message.content;
+  return response.data.choices[0].message.content;
 };
+
 
 const saveTextToHTML = async (text: string): Promise<string> => {
     try {
